@@ -26,9 +26,8 @@ function App() {
      <ul>
       {todoList.map(function (item) {
       return  <li key={item.id}>
-        {item.id}
-        {" "}
-        {item.title}
+        {item.id} {item.title}   
+        
         </li>;
 })}
       </ul>
