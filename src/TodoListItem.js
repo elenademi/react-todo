@@ -1,10 +1,12 @@
 import React from 'react';
 
-function TodoListItem(props) {
+
+function TodoListItem({todo}) {
     return(
         <li>
-        {props.todo.id} {props.todo.title}  
-        
+        {todo.title}  
+
+
         </li>
     )
 }
@@ -15,4 +17,6 @@ function TodoListItem(props) {
 
 
 
-export default TodoListItem;
+
+export default TodoListItem
+
