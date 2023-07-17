@@ -16,17 +16,20 @@ function useSemiPersistentState() {
 )}
 
 function App() {
+
   
   // const [todoList, setTodoList]= useState(JSON.parse(localStorage.getItem('savedTodoList')))
 
-  const [todoList, setTodoList]= useSemiPersistentState(JSON.parse(localStorage.getItem('savedTodoList')))
+  const [todoList, setTodoList]= useSemiPersistentState()
 
   // React.useEffect(function() {localStorage.setItem('savedTodoList', JSON.stringify(todoList));},[todoList])
     
 
+
   function addTodo (newTodo) {
     setTodoList([...todoList, newTodo])
   }
+
 
 
   
@@ -34,8 +37,10 @@ function App() {
      <>
      
      <h1 style={{ textAlign: 'center' }}>Todo List</h1>
+
      <AddTodoForm onAddTodo={addTodo}/>
      <TodoList todoList={todoList}/>
+
      
      {/* <p> <strong>{newTodo}</strong></p> */}
      

@@ -1,9 +1,11 @@
 import React from 'react';
 
+
 function TodoListItem({todo}) {
     return(
         <li>
         {todo.title}  
+
 
         </li>
     )
@@ -15,4 +17,6 @@ function TodoListItem({todo}) {
 
 
 
+
 export default TodoListItem
+
