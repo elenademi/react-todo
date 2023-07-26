@@ -22,14 +22,14 @@ import TodoListItem from './TodoListItem';
   
   
   
-function TodoList({todoList}) {
+function TodoList({todoList,onRemoveTodo}) {
   
         return(
         <ul>
 
             {/* { props.todoList.map((item) => <TodoListItem key={item.id} todo={item}/>)}  */}
             {todoList.map(function(todo) {
-              return <TodoListItem key={todo.id} todo={todo} />
+              return <TodoListItem  key={todo.id} todo={todo} onRemoveTodo={onRemoveTodo} />
               
               })}
            
