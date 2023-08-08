@@ -3,7 +3,6 @@ import React from 'react';
 
 
 
-
 function TodoListItem({todo,onRemoveTodo}) {
     
       
@@ -14,7 +13,6 @@ function TodoListItem({todo,onRemoveTodo}) {
         <button type="button" onClick={() => onRemoveTodo(todo.id)}>
         Remove
  </button> 
-
         </li>
     )
 }
@@ -25,6 +23,12 @@ function TodoListItem({todo,onRemoveTodo}) {
 
 
 
-
 export default TodoListItem
+
+
+
+
+
+
+
 
