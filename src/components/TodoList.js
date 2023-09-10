@@ -1,26 +1,8 @@
 import React from 'react';
 import TodoListItem from './TodoListItem';
-import style from './App.module.css';
-{/*const todoList = [
-    {
-      title: "Complete Assignment",
-       id: 1,
-    },
-  
-     {
-      title: "Read More",
-      id: 2,
-     },
-  
-     {
-      title: "Help Another Student",
-      id: 3,
-     }
-    ];
-  */}
-  
-  
-  
+import style from '../App.module.css';
+import PropTypes from 'prop-types';
+
 function TodoList({todoList,onRemoveTodo}) {
   
         return(
@@ -35,7 +17,12 @@ function TodoList({todoList,onRemoveTodo}) {
     );
 };
 
+TodoList.propTypes= {
 
+  todoList:PropTypes.array,
+  onRemoveTodo: PropTypes.func
+
+}
 
 
 
