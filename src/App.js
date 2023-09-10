@@ -4,6 +4,7 @@ import AddTodoForm from './AddTodoForm';
 import { BrowserRouter } from 'react-router-dom';
 import {Routes} from 'react-router-dom';
 import {Route} from 'react-router-dom';
+import style from './App.module.css';
 
 
 
@@ -117,7 +118,8 @@ function App() {
       <Route path="/" element={
       <>
      
-     <h1 style={{ textAlign: 'center' }}>Todo List</h1>
+     <h1 >Todo List</h1>
+     <div className={style.main}>
      
      <AddTodoForm onAddTodo={addTodo}/>
 
@@ -129,7 +131,7 @@ function App() {
       <TodoList todoList={todoList} onRemoveTodo={removeTodo}/>)}
 
      
-     
+     </div>
      
           
       </> 
