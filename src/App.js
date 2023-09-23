@@ -1,9 +1,13 @@
+
 import  React, { useState }  from 'react';
-import TodoList from './TodoList';
-import AddTodoForm from './AddTodoForm';
+
+import TodoList from './components/TodoList';
+import AddTodoForm from './components/AddTodoForm';
 import { BrowserRouter } from 'react-router-dom';
 import {Routes} from 'react-router-dom';
 import {Route} from 'react-router-dom';
+import style from './App.module.css';
+
 
 
 
@@ -116,9 +120,12 @@ function App() {
     <Routes>
       <Route path="/" element={
       <>
+
      
-     <h1 style={{ textAlign: 'center' }}>Todo List</h1>
+     <h1 >Todo List</h1>
+     <div className={style.main}>
      
+
      <AddTodoForm onAddTodo={addTodo}/>
 
      {isLoading ? (
@@ -129,7 +136,7 @@ function App() {
       <TodoList todoList={todoList} onRemoveTodo={removeTodo}/>)}
 
      
-     
+     </div>
      
           
       </> 
