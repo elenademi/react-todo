@@ -1,9 +1,11 @@
 
-
-  
-    import  React, { useState }  from 'react';
-import TodoList from './TodoList';
-import AddTodoForm from './AddTodoForm';
+import  React, { useState }  from 'react';
+import TodoList from './components/TodoList';
+import AddTodoForm from './components/AddTodoForm';
+import { BrowserRouter } from 'react-router-dom';
+import {Routes} from 'react-router-dom';
+import {Route} from 'react-router-dom';
+import style from './App.module.css';
 
 
 
@@ -13,18 +15,81 @@ function App() {
   const [todoList, setTodoList]=useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  React.useEffect(() => {
-    const getData = new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve({ data: { todoList: JSON.parse(localStorage.getItem('savedTodoList')||[]) } });
-      }, 2000);
-    });
+  async function fetchData ()  {
 
-    getData.then((result) => {
-      setTodoList(result.data.todoList);
-      setIsLoading(false); 
+    
+    const options = {
+      method: "GET",
+      headers: {
+          Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_PERSONAL_ACCESS_TOKEN}`
+          
+      }
+      
+     };
+     const url=`https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/${process.env.REACT_APP_TABLE_NAME}`
+   
+    
+
+    try {
+      
+  
+      const response = await fetch(
+        
+          url, options
+      );
+  console.log(response)
+      if (!response.ok) {
+        const message = `Error has occurred:
+                               ${response.status}`;
+        throw new Error(message);
+      }
+  
+      const data = await response.json();
+      const todos = data.records.map((todo) => {
+
+        const newTodo =  {
+            id: todo.id,
+            title: todo.fields.Title,
+            
+        }
+  
+        return newTodo
+  
     });
-  }, []);
+    setTodoList(todos);
+    setIsLoading(false);
+
+      console.log(data);
+      return data;
+      
+      
+       } 
+
+       
+       
+       catch (error) {
+      console.log(error.message);
+      return null;
+      
+    }
+
+    
+
+    
+      };
+
+   
+
+      
+     React.useEffect(()  =>{ fetchData()},[])
+
+
+     
+
+    
+
+
+  
 
    React.useEffect(function() { 
 
@@ -49,10 +114,14 @@ function App() {
 
   
   return (
-     <>
+    <BrowserRouter>
+    <Routes>
+      <Route path="/" element={
+      <>
      
-     <h1 style={{ textAlign: 'center' }}>Todo List</h1>
-
+     <h1 >Todo List</h1>
+     <div className={style.main}>
+     
      <AddTodoForm onAddTodo={addTodo}/>
 
      {isLoading ? (
@@ -63,12 +132,22 @@ function App() {
       <TodoList todoList={todoList} onRemoveTodo={removeTodo}/>)}
 
      
-     
+     </div>
      
           
-      </>
+      </> 
+      }
+      />
+      
+      <Route path="/new" element={
+        <h1>New Todo List</h1>
+      }/>
+
+      </Routes>
+      </BrowserRouter>
   );
 
 }
+
 
 export default App
