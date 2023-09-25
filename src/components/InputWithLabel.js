@@ -31,4 +31,14 @@ function InputWithLabel(props) {
     )
 }
 
+
+InputWithLabel.propTypes= {
+
+    value:PropTypes.string,
+    onChange: PropTypes.func
+
+  }
+
+
 export default InputWithLabel
+
