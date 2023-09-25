@@ -1,7 +1,9 @@
 import React from 'react'
 import { useState } from 'react'
 import InputWithLabel from './InputWithLabel'
-import style from './App.module.css';
+import style from '../App.module.css';
+import PropTypes from 'prop-types'
+
 
 function AddTodoForm({onAddTodo}){
 
