@@ -1,6 +1,5 @@
 import React from 'react';
 import style from '../App.module.css';
-
 import PropTypes from 'prop-types';
 
 function TodoListItem({todo,onRemoveTodo}) {
