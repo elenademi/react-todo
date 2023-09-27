@@ -25,7 +25,7 @@ function App() {
       }
       
      };
-     const url=`https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/${process.env.REACT_APP_TABLE_NAME}`
+     const url=`https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/${process.env.REACT_APP_TABLE_NAME}?sort[0][field]=createdTime&sort[0][direction]=desc`
    
     
 
@@ -73,23 +73,17 @@ function App() {
       
     }
 
-    
-
-    
+       
       };
 
    
-
       
-     React.useEffect(()  =>{ fetchData()},[])
+   React.useEffect(()  =>{ fetchData()},[])
 
-
-     
+   
 
     
-
-
-  
+ 
 
    React.useEffect(function() { 
 
