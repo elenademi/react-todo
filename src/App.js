@@ -36,6 +36,7 @@ function App() {
         
           url, options
       );
+      
   console.log(response)
       if (!response.ok) {
         const message = `Error has occurred:
@@ -97,20 +98,80 @@ function App() {
     localStorage.setItem('savedTodoList', JSON.stringify(todoList));}},[todoList])
 
    
+     
+  async function addTodo(newTodo) {
+    
+    const title = newTodo.title; 
+    const newTodoItem = {
+      fields: {
+        Title: title,
+      },
+    };
   
     
-
-  function addTodo (newTodo) {
-    setTodoList([...todoList, newTodo])
-  }
-
-
-  function removeTodo(id) {
-    const newTodoList = todoList.filter((item) => item.id !==id)
-      setTodoList(newTodoList)
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_PERSONAL_ACCESS_TOKEN}`,
+      },
+      body: JSON.stringify(newTodoItem),
+    };
+  
+    
+    const url = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/${process.env.REACT_APP_TABLE_NAME}`;
+  
+    try {
+      const response = await fetch(url, options);
+  
+      if (!response.ok) {
+        throw new Error(`Error has occurred: ${response.status}`);
+      }
+  
+            
+      setTodoList([...todoList, newTodo])
+      localStorage.setItem('savedTodoList', JSON.stringify([...todoList, newTodo]));
       
+    } catch (error) {
+      console.error(error.message);
+   }
   }
+  
 
+
+  
+
+  async function removeTodo(id) {
+    
+    const options = {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_PERSONAL_ACCESS_TOKEN}`,
+      },
+    };
+  
+    
+    const url = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/${process.env.REACT_APP_TABLE_NAME}/${id}`;
+  
+    try {
+      const response = await fetch(url, options);
+  
+      if (!response.ok) {
+        throw new Error(`Error has occurred: ${response.status}`);
+      }
+  
+      
+      const data = await response.json();
+  
+      const updatedTodoList = todoList.filter((todo) => todo.id !== id);
+  
+      
+      setTodoList(updatedTodoList);
+    } catch (error) {
+      console.error(error.message);
+    }
+  }
+  
   
   return (
     <BrowserRouter>
@@ -150,6 +211,24 @@ function App() {
 
 
 export default App
+
+          
+     
+
+       
+      
+   
+
+    
+
+
+  
+
+
+
+       
+      
+
 
 
     
